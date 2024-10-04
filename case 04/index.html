@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case 04</title>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        section {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .onScreen {
+            border-radius: 100%;
+            border: 3px solid red;
+            animation: animation 2s infinite;
+        }
+
+        .onclick {
+            border-radius: 100%;
+            border: 3px solid red;
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            display: none;
+        }
+
+        @keyframes animation {
+            from {
+                width: 10px;
+                height: 10px;
+                border: 5px solid red;
+            }
+            to {
+                width: 300px;
+                height: 300px;
+                border: 1px solid red;
+            }
+        }
+
+        @keyframes ripple {
+            from {
+                transform: scale(0);
+                opacity: 1;
+            }
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section>
+    <div class="onScreen"></div>
+    <div class="onclick"></div>
+</section>
+
+<script>
+    const section = document.querySelector('section');
+    const ripple = document.querySelector('.onclick');
+
+
+    section.addEventListener('click', (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+
+
+        ripple.style.left = `${x - 5}px`;
+        ripple.style.top = `${y - 5}px`;
+
+
+        ripple.style.display = 'block';
+
+
+        ripple.style.animation = 'ripple 1s ease-out';
+
+
+        ripple.addEventListener('animationend', () => {
+            ripple.style.display = 'none';
+        });
+    });
+</script>
+
+</body>
+</html>
